@@ -1,8 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv'); 
-const helmet = require('helmet');
-const morgan = require('morgan');
 const db = require('./config/connection');
 
 // Uncomment when routes are created
