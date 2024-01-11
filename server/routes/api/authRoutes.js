@@ -11,10 +11,14 @@ router.post('/register', async (req, res) => {
  
         // Create new user using the User model
         const newuser = await new User({
-        fullName : req.body.fullName,
+        name : req.body.fullName,
         username : req.body.username,
         email: req.body.email,
-        password: req.body.password
+        password: hashedPassword,
+        profileImg: req.body.profileImg,
+        friends: [],
+        favorites: [],
+        library: []
     })
     
         // Save user and respond
@@ -35,7 +39,7 @@ router.post('/login', async (req, res) => {
         const validPassword = await bcrypt.compare(req.body.password, user.password)
         !validPassword && res.status(400).json("Wrong password")    
 
-        res.status(200).json(user)
+        res.status(200).send("You are logged in!")
     } catch (err) {
         res.status(500).json(err)
     }
