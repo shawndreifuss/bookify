@@ -15,6 +15,6 @@ const Bookmark = () => {
         {bookmarked ? <BookmarkAddedIcon /> : <BookmarkBorderIcon />}
       </button>
     );
-    }
+    }  
 
 export default Bookmark
