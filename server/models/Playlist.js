@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+const { Schema, model } = require('mongoose');
 
-const PlaylistSchema = new mongoose.Schema({
+const PlaylistSchema = new Schema({
     name: {
         type: String,
         required: true,
@@ -20,7 +20,7 @@ const PlaylistSchema = new mongoose.Schema({
     },
     books: [{
         type: Schema.Types.ObjectId,
-        ref: 'Book',
+        ref: 'Book'
     }]
 },
 {
@@ -32,4 +32,4 @@ const PlaylistSchema = new mongoose.Schema({
   }
 );
 
-module.exports = mongoose.model("Playlist", PlaylistSchema)
+module.exports = model("Playlist", PlaylistSchema)

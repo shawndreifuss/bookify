@@ -1,6 +1,7 @@
 const connection = require('../config/connection');
-const { User } = require('../models');
+const { User, Playlist } = require('../models');
 const { getRandomName, getRandomUsername, getRandomPassword } = require('./data');
+const playlistData = require('./playlistData.json');
 
 connection.on('error', (err) => err);
 
@@ -37,6 +38,18 @@ connection.once('open', async () => {
   }
 
   await User.collection.insertMany(users);
+
+  let playlistCheck = await connection.db.listCollections({ name: 'playlists' }).toArray();
+  if (playlistCheck.length) {
+    await connection.dropCollection('playlists');
+  }
+
+  await Playlist.collection.insertMany(playlistData);
+
+  let bookCheck = await connection.db.listCollections({ name: 'books' }).toArray();
+  if (bookCheck.length) {
+    await connection.dropCollection('books');
+  }
   
 
   // loop through the saved applications, for each application we need to generate a application response and insert the application responses
